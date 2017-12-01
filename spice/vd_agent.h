@@ -63,14 +63,19 @@ typedef struct SPICE_ATTR_PACKED VDAgentMessage {
 #endif
 
 enum {
+    // server -> agent
     VD_AGENT_MOUSE_STATE = 1,
+    // client -> agent
+    // agent send back acknowledge using VD_AGENT_REPLY
     VD_AGENT_MONITORS_CONFIG,
+    // agent -> client
     VD_AGENT_REPLY,
     /* Set clipboard data (both directions).
      * Message comes with type and data.
      * See VDAgentClipboard structure.
      */
     VD_AGENT_CLIPBOARD,
+    // client -> agent
     VD_AGENT_DISPLAY_CONFIG,
     VD_AGENT_ANNOUNCE_CAPABILITIES,
     /* Asks to listen for clipboard changes (both directions).
