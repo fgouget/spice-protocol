@@ -42,6 +42,8 @@
 
 #include <spice/types.h>
 
+#include <spice/start-packed4.h>
+
 /*
  * Structures are all "naturally aligned"
  * containing integers up to 64 bit.
@@ -245,5 +247,7 @@ typedef struct StreamMsgCursorMove {
     int32_t x;
     int32_t y;
 } StreamMsgCursorMove;
+
+#include <spice/end-packed4.h>
 
 #endif /* SPICE_STREAM_DEVICE_H_ */
