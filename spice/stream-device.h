@@ -94,9 +94,13 @@ typedef enum StreamMsgType {
     STREAM_TYPE_CURSOR_MOVE,
     /* the graphics device display information message (device address and display id) */
     STREAM_TYPE_DEVICE_DISPLAY_INFO,
+    /* guest information */
+    STREAM_TYPE_GUEST_INFO,
 } StreamMsgType;
 
 typedef enum StreamCapabilities {
+    // server accepts StreamMsgGuestInfo
+    STREAM_CAP_GUEST_INFO = 0,
     STREAM_CAP_END // this must be the last
 } StreamCapabilities;
 
@@ -247,6 +251,28 @@ typedef struct StreamMsgCursorMove {
     int32_t x;
     int32_t y;
 } StreamMsgCursorMove;
+
+/* Guest information
+ * This message is sent by the guest to the host.
+ * The guest send information about the stream in the guest.
+ *
+ * States allowed: not Streaming
+ */
+typedef struct StreamMsgGuestInfo {
+    /* Position of the stream in the guest surface.
+     * The stream can came from part of a surface managed by the
+     * display server. This can happens for instance using Xorg.
+     */
+    int32_t stream_x;
+    int32_t stream_y;
+    /* Guest ID.
+     * The ID is used to send back mouse events.
+     * This is used to map the SPICE DisplayChannel IDs to the proper
+     * guest ID.
+     */
+    uint8_t id;
+    uint8_t padding1[3];
+} StreamMsgGuestInfo;
 
 #include <spice/end-packed4.h>
 
