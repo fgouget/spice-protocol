@@ -34,7 +34,11 @@
 #include <spice/macros.h>
 #include <spice/types.h>
 
+#ifndef _WIN32
 #define SPICE_STAT_SHM_NAME "/spice.%u"
+#else
+#define SPICE_STAT_SHM_NAME "Global\\spice-stats-%u"
+#endif
 #define SPICE_STAT_NODE_NAME_MAX 20
 #define SPICE_STAT_MAGIC SPICE_MAGIC_CONST("STAT")
 #define SPICE_STAT_VERSION 1
